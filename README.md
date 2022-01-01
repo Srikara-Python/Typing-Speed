@@ -1,2 +1,2 @@
-# Typing-Speed
- Simple gui for finding out your typing dpeed
+########### Typing-Speed
+ Simple gui for finding out your typing speed
