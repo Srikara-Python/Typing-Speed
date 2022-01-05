@@ -2,9 +2,9 @@ from tkinter import *
 import time
 from tkinter import messagebox
 from random import *
-# Import string and random module
 import string
 import random
+
 
 root = Tk()
 
@@ -14,8 +14,6 @@ e.grid(row=0, column=0, columnspan=3)
 
 def random_char(y):
        return ''.join(random.choice(string.ascii_letters) for x in range(y))
-
-
 
 def start():
     global rondomm_char
@@ -39,6 +37,13 @@ def start():
     if time_take == True:
         time_taken.destroy()
     start_time=time.time()
+
+def custom():
+    custom_word = Toplevel()
+    label_custom = Label(custom_word, text='Enter a word here :- ').grid(row=0, column=0)
+    e_custom = Entry(custom_word)
+    e_custom.grid(row=0, column=1)
+    submit_custom = Button(custom_word, text='Submit').grid(row=1, column=1)
     
 
 def stop():
@@ -58,21 +63,12 @@ def stop():
         pass
 
 
-a = Button(root, text="New Word", command=start)
+
+a = Button(root, text="Random Word", command=start)
 a.grid(row=2, column=0)
 b = Button(root, text="Stop", command=stop)
-b.grid(row=2, column=1)
-
+b.grid(row=2, column=2)
+c = Button(root, text="Custom Word", command=custom)
+c.grid(row=2, column=1)
 
 root.mainloop()
-
-
-
-
-# def which_button(button_press):
-# 	print(button_press)
-
-
-# b1 = Button(app, text="Apple",
-# 			command=lambda m="It is an apple": which_button(m))
-
