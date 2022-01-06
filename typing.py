@@ -6,19 +6,27 @@ import string
 import random
 
 
+
 root = Tk()
+root.title("Typing speed test")
 
 
 e = Entry(root, width=50)
 e.grid(row=0, column=0, columnspan=10)
 
 def random_char(y):
-       return ''.join(random.choice(string.ascii_letters) for x in range(y))
+    return ''.join(random.choice(string.ascii_letters) for x in range(y))
 
 
 def start():
     global rondomm_char
     rondomm_char = random_char(10)
+
+    global try_again_button
+    global try_again
+    try_again = rondomm_char
+    try_again_button = Button(root, text="Try again", command=try_again_start)
+    try_again_button.grid(row=3, column=0)
 
     global random_word
     word = 'random_word' in globals()
@@ -45,49 +53,72 @@ def start():
 
 
 def custom_start():
-       global custom_stop
-       custom_stop = Button(root, text="Stop Custom", command=finish_custom)
-       custom_stop.grid(row=2, column=2)
-       wordd = 'random_word' in globals()
-       if wordd == True:
+    global custom_stop
+    custom_stop = Button(root, text="Stop Custom", command=finish_custom)
+    custom_stop.grid(row=2, column=2)
+    wordd = 'random_word' in globals()
+    if wordd == True:
         random_word.destroy()
 
-       else:
+    else:
         pass
 
-       user_word = Label(root, text=word)
-       user_word.grid(row=1, column=0)
+    user_word = Label(root, text=word)
+    user_word.grid(row=1, column=0)
 
 
-       global start_time
-       time_take = "time_taken" in globals()
+    global start_time
+    time_take = "time_taken" in globals()
 
-       if time_take == True:
+    if time_take == True:
         time_taken.destroy()
-       start_time=time.time()
+    start_time=time.time()
 
+
+
+def try_again_start():
+    global again_stop_button
+    again_stop_button = Button(root, text="Stop again", command=try_again_stop)
+    again_stop_button.grid(row=2, column=2)
+    wordd = 'random_word' in globals()
+    if wordd == True:
+        random_word.destroy()
+
+    else:
+        pass
+
+    user_word = Label(root, text=try_again)
+    user_word.grid(row=1, column=0)
+
+
+    global start_time
+    time_take = "time_taken" in globals()
+
+    if time_take == True:
+        time_taken.destroy()
+    start_time=time.time()
 
 #############################################################################################
 
 def custom():
-       global e_custom
-       custom_word = Toplevel()
-       label_custom = Label(custom_word, text='Enter a word here :- ').grid(row=0, column=0)
-       e_custom = Entry(custom_word)
-       e_custom.grid(row=0, column=1)
-       submit_custom = Button(custom_word, text='Submit', command=custom_word_add)
-       submit_custom.grid(row=1, column=1)
+   global e_custom
+   custom_word = Toplevel()
+   label_custom = Label(custom_word, text='Enter a word here :- ').grid(row=0, column=0)
+   e_custom = Entry(custom_word)
+   e_custom.grid(row=0, column=1)
+   submit_custom = Button(custom_word, text='Submit', command=custom_word_add)
+   submit_custom.grid(row=1, column=1)
 
 def custom_word_add():
-       global word
-       word = e_custom.get()
-       custom_word = Button(root, text=word, command=custom_start)
-       custom_word.grid(row=4, column=1)
+   global word
+   word = e_custom.get()
+   custom_word = Button(root, text=word, command=custom_start)
+   custom_word.grid(row=4, column=1)
 
-       
+
 #############################################################################################
 
-    
+
 
 def stop():
     test = e.get()
@@ -100,7 +131,7 @@ def stop():
 
     if test == rondomm_char:
         global time_taken
-        time_taken = Label(root, text=round(time.time()-start_time))
+        time_taken = Label(root, text=str(round(time.time()-start_time)) + ' sec')
         time_taken.grid(row=1, column=1)
     else:
         pass
@@ -117,10 +148,28 @@ def finish_custom():
 
     if test == word:
         global time_taken
-        time_taken = Label(root, text=round(time.time()-start_time))
+        time_taken = Label(root, text=str(round(time.time()-start_time)) + ' sec')
         time_taken.grid(row=1, column=1)
     else:
         pass
+
+def try_again_stop():
+
+    test = e.get()
+
+    if test == try_again:
+        pass
+    else:
+        error = messagebox.askokcancel("Name Error ", "Please Enter The correct word")
+    # time.sleep()
+
+    if test == try_again:
+        global time_taken
+        time_taken = Label(root, text=str(round(time.time()-start_time)) + ' sec')
+        time_taken.grid(row=1, column=1)
+    else:
+        pass
+
 
 
 
