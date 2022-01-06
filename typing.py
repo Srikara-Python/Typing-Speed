@@ -39,11 +39,21 @@ def start():
     start_time=time.time()
 
 def custom():
-    custom_word = Toplevel()
-    label_custom = Label(custom_word, text='Enter a word here :- ').grid(row=0, column=0)
-    e_custom = Entry(custom_word)
-    e_custom.grid(row=0, column=1)
-    submit_custom = Button(custom_word, text='Submit').grid(row=1, column=1)
+       global e_custom
+       custom_word = Toplevel()
+       label_custom = Label(custom_word, text='Enter a word here :- ').grid(row=0, column=0)
+       e_custom = Entry(custom_word)
+       e_custom.grid(row=0, column=1)
+       submit_custom = Button(custom_word, text='Submit', command=custom_word_add)
+       submit_custom.grid(row=1, column=1)
+
+def custom_word_add():
+       print("Hello")
+       word = e_custom.get()
+       custom_word = Button(root, text=word)
+       custom_word.grid(row=4, column=1)
+
+
     
 
 def stop():
