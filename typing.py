@@ -6,9 +6,9 @@ import string
 import random
 
 
-
 root = Tk()
 root.title("Typing speed test")
+
 
 
 e = Entry(root, width=50)
@@ -19,6 +19,7 @@ def random_char(y):
 
 
 def start():
+    e.delete(0, END)
     global rondomm_char
     rondomm_char = random_char(10)
 
@@ -53,6 +54,7 @@ def start():
 
 
 def custom_start():
+    e.delete(0, END)
     global custom_stop
     custom_stop = Button(root, text="Stop Custom", command=finish_custom)
     custom_stop.grid(row=2, column=2)
@@ -77,6 +79,7 @@ def custom_start():
 
 
 def try_again_start():
+    e.delete(0, END)
     global again_stop_button
     again_stop_button = Button(root, text="Stop again", command=try_again_stop)
     again_stop_button.grid(row=2, column=2)
